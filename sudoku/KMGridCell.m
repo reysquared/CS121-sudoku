@@ -8,6 +8,8 @@
 
 #import "KMGridCell.h"
 
+CGFloat CELL_INSET_RATIO = 0.05;
+
 @implementation KMGridCell
 {
     UIButton* _button;
@@ -24,8 +26,8 @@
         _column = col;
         
         CGFloat size = CGRectGetWidth(frame);
-        CGFloat inset = size*0.05;
-        CGFloat buttonSize = size*0.90; // TODO Should really probably get rid of more magic values...
+        CGFloat inset = size*CELL_INSET_RATIO;
+        CGFloat buttonSize = size - (2 * inset);
         CGRect buttonFrame = CGRectMake(inset, inset, buttonSize, buttonSize);
         
         _button = [[UIButton alloc] initWithFrame:buttonFrame];
@@ -41,8 +43,6 @@
     return self;
 }
 
-// I don't know if this is actually a good way to do this, but it's a way.
-//- (id)initWithFrame:(CGRect)frame
 - (void)setInitialValue:(int)val
 {
     [_button setTitle:[NSString stringWithFormat:@"%d", val] forState:UIControlStateNormal];
@@ -61,14 +61,5 @@
 {
     [sender setBackgroundColor:[UIColor whiteColor]];
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end

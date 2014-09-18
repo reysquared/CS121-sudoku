@@ -9,9 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface KMGridCell : UIView
-/*@property (readonly) int row;
-@property (readonly) int col;
-@property int val;*/
 - (id)initWithFrame:(CGRect)frame Row:(int)row Column:(int)col;
 - (void)setInitialValue:(int)val;
 @end

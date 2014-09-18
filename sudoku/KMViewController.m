@@ -9,6 +9,8 @@
 #import "KMViewController.h"
 #import "KMGridView.h"
 
+CGFloat GRID_INSET_RATIO = 0.1;
+
 int initialGrid[9][9] = {
     {7,0,0,4,2,0,0,0,9},
     {0,0,9,5,0,0,0,0,4},
@@ -36,9 +38,9 @@ int initialGrid[9][9] = {
     
     
     CGRect frame = self.view.frame;
-    CGFloat x = CGRectGetWidth(frame)*.1;
-    CGFloat y = CGRectGetHeight(frame)*.1;
-    CGFloat size = MIN(CGRectGetWidth(frame), CGRectGetHeight(frame))*.80;
+    CGFloat x = CGRectGetWidth(frame)*GRID_INSET_RATIO;
+    CGFloat y = CGRectGetHeight(frame)*GRID_INSET_RATIO;
+    CGFloat size = MIN(CGRectGetWidth(frame), CGRectGetHeight(frame))*(1 - 2 * GRID_INSET_RATIO);
     
     CGRect gridFrame = CGRectMake(x, y, size, size);
     
@@ -51,10 +53,8 @@ int initialGrid[9][9] = {
 
 - (void)initializeGrid
 {
-    for (int row = 0; row < 9; row++)
-    {
-        for (int col = 0; col < 9; col++)
-        {
+    for (int row = 0; row < 9; row++) {
+        for (int col = 0; col < 9; col++) {
             int val = initialGrid[row][col];
             if (val > 0) {
                 [_gridView setInitialValueRow:row Column:col Value:val];
@@ -66,7 +66,7 @@ int initialGrid[9][9] = {
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    // TODO Dispose of any resources that can be recreated.
 }
 
 @end

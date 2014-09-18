@@ -42,7 +42,7 @@ CGFloat PADDING_RATIO = 0.01;
             NSMutableArray* currRow = [[NSMutableArray alloc] initWithCapacity:GRID_SIZE];
             
             for (int col = 0; col < GRID_SIZE; col++) {
-                KMGridCell* newCell = [self createCellAtRow:row andColumn:col];
+                KMGridCell* newCell = [self createCellRow:row Column:col];
                 [currRow addObject:newCell];
             }
             
@@ -53,7 +53,7 @@ CGFloat PADDING_RATIO = 0.01;
 }
 
 // This method will assume row and column to be 0-indexed, not 1-indexed.
-- (KMGridCell*)createCellAtRow:(int)row andColumn:(int)col
+- (KMGridCell*)createCellRow:(int)row Column:(int)col
 {
     CGFloat y;
     CGFloat x;
@@ -76,11 +76,6 @@ CGFloat PADDING_RATIO = 0.01;
     [self addSubview:newCell];
     
     return newCell;
-}
-
-- (void)unhighlightAllCells
-{
-    
 }
 
 @end
