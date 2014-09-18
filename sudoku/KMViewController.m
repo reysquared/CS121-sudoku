@@ -33,7 +33,7 @@ int initialGrid[9][9] = {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    
     
     CGRect frame = self.view.frame;
     CGFloat x = CGRectGetWidth(frame)*.1;
@@ -46,7 +46,21 @@ int initialGrid[9][9] = {
     _gridView.backgroundColor = [UIColor blackColor];
     [self.view addSubview:_gridView];
     
-    [_gridView initializeGrid:initialGrid];
+    [self initializeGrid];
+}
+
+- (void)initializeGrid
+{
+    for (int row = 0; row < 9; row++)
+    {
+        for (int col = 0; col < 9; col++)
+        {
+            int val = initialGrid[row][col];
+            if (val > 0) {
+                [_gridView setInitialValueRow:row Column:col Value:val];
+            }
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning

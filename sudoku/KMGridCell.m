@@ -13,19 +13,15 @@
     UIButton* _button;
     int _row;
     int _column;
-    int _value;
 }
 
-// I don't know if this is actually a good way to do this, but it's a way.
-//- (id)initWithFrame:(CGRect)frame
-- (id)initWithFrame:(CGRect)frame atRow:(int)row atColumn:(int)col withValue:(int)val
+- (id)initWithFrame:(CGRect)frame Row:(int)row Column:(int)col
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
         _row = row;
         _column = col;
-        _value = val;
         
         CGFloat size = CGRectGetWidth(frame);
         CGFloat inset = size*0.05;
@@ -36,18 +32,23 @@
         _button.backgroundColor = [UIColor whiteColor];
         _button.showsTouchWhenHighlighted = YES;
         
-        if(_value > 0)
-        {
-            [_button setTitle:[NSString stringWithFormat:@"%d", _value] forState:UIControlStateNormal];
-            [_button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        }
-        
         [_button addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchDown];
         [_button addTarget:self action:@selector(buttonReleased:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside];
         
         [self addSubview:_button];
     }
+    
     return self;
+}
+
+// I don't know if this is actually a good way to do this, but it's a way.
+//- (id)initWithFrame:(CGRect)frame
+- (void)setInitialValue:(int)val
+{
+    [_button setTitle:[NSString stringWithFormat:@"%d", val] forState:UIControlStateNormal];
+    [_button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    
+    // TODO Disable button for initial values
 }
 
 - (void)buttonPressed:(id)sender

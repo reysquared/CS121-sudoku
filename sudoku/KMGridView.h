@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface KMGridView : UIView
-- (void)initializeGrid:(int[9][9])grid;
+- (void)setInitialValueRow:(int)row Column:(int)col Value:(int)val;
 @end

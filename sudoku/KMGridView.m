@@ -19,36 +19,42 @@ CGFloat PADDING_RATIO = 0.01;
 {
     CGFloat _paddingSize;
     CGFloat _cellSize;
+    NSMutableArray* _cells;
 }
 
-- (void)initializeGrid:(int[9][9])grid
+- (void)setInitialValueRow:(int)row Column:(int)col Value:(int)val
 {
-    for (int row = 0; row < 9; row++)
-    {
-        for (int col = 0; col < 9; col++)
-        {
-            [self createCellAtRow:row andColumn:col withValue:grid[row][col]];
-        }
-    }
+    [_cells[row][col] setInitialValue:val];
 }
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
+        // Initialization code
         CGFloat size = CGRectGetWidth(frame);
         _paddingSize = size * PADDING_RATIO;
         _cellSize = (size - (_paddingSize * PADDING_COUNT)) / GRID_SIZE;
         
+        _cells = [[NSMutableArray alloc] initWithCapacity:GRID_SIZE];
+        
+        for (int row = 0; row < GRID_SIZE; row++) {
+            NSMutableArray* currRow = [[NSMutableArray alloc] initWithCapacity:GRID_SIZE];
+            
+            for (int col = 0; col < GRID_SIZE; col++) {
+                KMGridCell* newCell = [self createCellAtRow:row andColumn:col];
+                [currRow addObject:newCell];
+            }
+            
+            [_cells addObject:currRow];
+        }
     }
     return self;
 }
 
 // This method will assume row and column to be 0-indexed, not 1-indexed.
-- (void)createCellAtRow:(int)row andColumn:(int)col withValue:(int)val
+- (KMGridCell*)createCellAtRow:(int)row andColumn:(int)col
 {
-    NSLog(@"Creating cell at %d,%d with value %d.", row, col, val);
-    
     CGFloat y;
     CGFloat x;
     
@@ -63,22 +69,18 @@ CGFloat PADDING_RATIO = 0.01;
     x += _paddingSize;
     x += (col / SUBGRID_SIZE) * _paddingSize;
     
-    NSLog(@"Cell position: %1.2f, %1.2f. Width: %1.2f.", x, y, _cellSize);
-    
     CGRect cellFrame = CGRectMake(x, y, _cellSize, _cellSize);
     
-    KMGridCell* newCell = [[KMGridCell alloc] initWithFrame:cellFrame atRow:row atColumn:col withValue:val];
+    KMGridCell* newCell = [[KMGridCell alloc] initWithFrame:cellFrame Row:row Column:col];
     
     [self addSubview:newCell];
+    
+    return newCell;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+- (void)unhighlightAllCells
 {
-    // Drawing code
+    
 }
-*/
 
 @end
