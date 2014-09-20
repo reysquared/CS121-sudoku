@@ -73,6 +73,8 @@ CGFloat PADDING_RATIO = 0.01;
     
     KMGridCell* newCell = [[KMGridCell alloc] initWithFrame:cellFrame Row:row Column:col];
     
+
+    
     [self addSubview:newCell];
     
     return newCell;

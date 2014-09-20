@@ -48,7 +48,8 @@ CGFloat CELL_INSET_RATIO = 0.05;
     [_button setTitle:[NSString stringWithFormat:@"%d", val] forState:UIControlStateNormal];
     [_button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
-    // TODO Disable button for initial values
+    // Cells for initial values cannot be edited, so we just prevent interacting with the button
+    [_button setEnabled:NO];
 }
 
 - (void)buttonPressed:(id)sender
