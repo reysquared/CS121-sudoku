@@ -10,4 +10,6 @@
 
 @interface KMNumPadView : UIView
 
+- (int)currentNumber;
+
 @end

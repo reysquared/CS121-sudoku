@@ -40,6 +40,7 @@ CGFloat GRID_INSET_RATIO = 0.1;
     
     _gridView = [[KMGridView alloc] initWithFrame:gridFrame];
     _gridView.backgroundColor = [UIColor blackColor];
+    [_gridView addTarget:self action:@selector(gridPressedRow:Column:)];
     
     [self.view addSubview:_gridView];
     
@@ -53,11 +54,23 @@ CGFloat GRID_INSET_RATIO = 0.1;
     _numPadView.backgroundColor = [UIColor blackColor];
     
     _gridModel = [[KMGridModel alloc] init];
+
     
     [self.view addSubview:_numPadView];
     
     [self initializeGrid];
 }
+
+- (void)gridPressedRow:(NSNumber*)row Column:(NSNumber*)col
+{
+    int val = [_numPadView currentNumber];
+    BOOL changed = [_gridModel updateGridRow:[row intValue] Column:[col intValue] Value:val];
+    
+    if (changed) {
+        [_gridView changeValueRow:[row intValue] Column:[col intValue] Value:val];
+    }
+}
+
 
 - (void)initializeGrid
 {

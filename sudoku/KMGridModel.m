@@ -8,7 +8,7 @@
 
 #import "KMGridModel.h"
 
-int initialGrid[9][9]  = {
+int _initialGrid[9][9]  = {
     {7,0,0,4,2,0,0,0,9},
     {0,0,9,5,0,0,0,0,4},
     {0,2,0,6,9,0,5,0,0},
@@ -19,7 +19,7 @@ int initialGrid[9][9]  = {
     {3,4,0,9,0,0,1,0,0},
     {8,0,0,3,0,2,7,4,0},
 };
-int currentGrid[9][9]  = {
+int _currentGrid[9][9]  = {
     {7,0,0,4,2,0,0,0,9},
     {0,0,9,5,0,0,0,0,4},
     {0,2,0,6,9,0,5,0,0},
@@ -30,42 +30,13 @@ int currentGrid[9][9]  = {
     {3,4,0,9,0,0,1,0,0},
     {8,0,0,3,0,2,7,4,0},
 };
+
 
 
 @implementation KMGridModel
-{
-    int _initialGrid[9][9];
-    int _currentGrid[9][9];
-}
 
 - (id)init
 {
-    int j = 0;
-    
-//    _initialGrid = {
-//        {7,0,0,4,2,0,0,0,9},
-//        {0,0,9,5,0,0,0,0,4},
-//        {0,2,0,6,9,0,5,0,0},
-//        {6,5,0,0,0,0,4,3,0},
-//        {0,8,0,0,0,6,0,0,7},
-//        {0,1,0,0,4,5,6,0,0},
-//        {0,0,0,8,6,0,0,0,2},
-//        {3,4,0,9,0,0,1,0,0},
-//        {8,0,0,3,0,2,7,4,0},
-//    };
-//    
-//    _currentGrid = {
-//        {7,0,0,4,2,0,0,0,9},
-//        {0,0,9,5,0,0,0,0,4},
-//        {0,2,0,6,9,0,5,0,0},
-//        {6,5,0,0,0,0,4,3,0},
-//        {0,8,0,0,0,6,0,0,7},
-//        {0,1,0,0,4,5,6,0,0},
-//        {0,0,0,8,6,0,0,0,2},
-//        {3,4,0,9,0,0,1,0,0},
-//        {8,0,0,3,0,2,7,4,0},
-//    };
-    
     return self;
 }
 
@@ -76,11 +47,14 @@ int currentGrid[9][9]  = {
         [self checkSubgridRow:row Column:col Value:val];
 }
 
-- (void)updateGridRow:(int)row Column:(int)col Value:(int)val
+- (BOOL)updateGridRow:(int)row Column:(int)col Value:(int)val
 {
-    if ([self checkGridRow:(int)row Column:(int)col Value:(int)val]) {
+    // TODO ensure not modifying initial grid cells
+    if ([self checkGridRow:(int)row Column:(int)col Value:(int)val] || val == 0) {
         _currentGrid[row][col] = val;
+        return YES;
     }
+    return NO; // TODO
 }
 
 - (BOOL)checkRow:(int)row Value:(int)val
@@ -119,7 +93,7 @@ int currentGrid[9][9]  = {
 
 - (int)getGridValueRow:(int)row Column:(int)col
 {
-    return initialGrid[row][col];
+    return _initialGrid[row][col];
 }
 
 

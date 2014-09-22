@@ -11,5 +11,6 @@
 @interface KMGridModel : NSObject
 
 - (int)getGridValueRow:(int)row Column:(int)col;
+- (BOOL)updateGridRow:(int)row Column:(int)col Value:(int)val;
 
 @end

@@ -18,6 +18,7 @@ CGFloat NUMPAD_PADDING_RATIO = 0.1;
 
 - (id)initWithFrame:(CGRect)frame
 {
+    _currentNumber = 0;
     self = [super initWithFrame:frame];
     if (self) {
         _buttons = [[NSMutableArray alloc] initWithCapacity:9];
@@ -53,6 +54,11 @@ CGFloat NUMPAD_PADDING_RATIO = 0.1;
         }
     }
     return self;
+}
+
+- (int)currentNumber
+{
+    return _currentNumber;
 }
 
 - (void)buttonPressed:(id)sender
