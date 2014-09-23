@@ -20,11 +20,19 @@ CGFloat PADDING_RATIO = 0.01;
     CGFloat _paddingSize;
     CGFloat _cellSize;
     NSMutableArray* _cells;
+    
+    id _target;
+    SEL _action;
 }
 
 - (void)setInitialValueRow:(int)row Column:(int)col Value:(int)val
 {
     [_cells[row][col] setInitialValue:val];
+}
+
+- (void)changeValueRow:(int)row Column:(int)col Value:(int)val
+{
+    [_cells[row][col] changeValue:val];
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -44,12 +52,25 @@ CGFloat PADDING_RATIO = 0.01;
             for (int col = 0; col < GRID_SIZE; col++) {
                 KMGridCell* newCell = [self createCellRow:row Column:col];
                 [currRow addObject:newCell];
+                
+                [newCell addTarget:self action:@selector(cellPressedRow:Column:)];
             }
             
             [_cells addObject:currRow];
         }
     }
     return self;
+}
+
+-(void) addTarget:(id)target action:(SEL)action
+{
+    _target = target;
+    _action = action;
+}
+
+- (void)cellPressedRow:(NSNumber*)row Column:(NSNumber*)col
+{
+    [_target performSelector:_action withObject:row withObject:col];
 }
 
 // This method will assume row and column to be 0-indexed, not 1-indexed.
@@ -72,6 +93,8 @@ CGFloat PADDING_RATIO = 0.01;
     CGRect cellFrame = CGRectMake(x, y, _cellSize, _cellSize);
     
     KMGridCell* newCell = [[KMGridCell alloc] initWithFrame:cellFrame Row:row Column:col];
+    
+
     
     [self addSubview:newCell];
     

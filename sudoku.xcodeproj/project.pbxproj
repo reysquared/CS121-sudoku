@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA39289019CCB5DC0081FD0D /* KMGridModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DA39288F19CCB5DC0081FD0D /* KMGridModel.m */; };
+		DA39289319CCE37C0081FD0D /* KMNumPadView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA39289219CCE37C0081FD0D /* KMNumPadView.m */; };
 		EFCDDC9019C7A88C00448677 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFCDDC8F19C7A88C00448677 /* Foundation.framework */; };
 		EFCDDC9219C7A88C00448677 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFCDDC9119C7A88C00448677 /* CoreGraphics.framework */; };
 		EFCDDC9419C7A88C00448677 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFCDDC9319C7A88C00448677 /* UIKit.framework */; };
@@ -36,6 +38,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DA39288E19CCB5DC0081FD0D /* KMGridModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMGridModel.h; sourceTree = "<group>"; };
+		DA39288F19CCB5DC0081FD0D /* KMGridModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMGridModel.m; sourceTree = "<group>"; };
+		DA39289119CCE37C0081FD0D /* KMNumPadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMNumPadView.h; sourceTree = "<group>"; };
+		DA39289219CCE37C0081FD0D /* KMNumPadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMNumPadView.m; sourceTree = "<group>"; };
 		EFCDDC8C19C7A88C00448677 /* sudoku.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sudoku.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFCDDC8F19C7A88C00448677 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		EFCDDC9119C7A88C00448677 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -123,10 +129,14 @@
 				EFCDDCA119C7A88C00448677 /* Main.storyboard */,
 				EFCDDCA419C7A88C00448677 /* KMViewController.h */,
 				EFCDDCA519C7A88C00448677 /* KMViewController.m */,
+				DA39288E19CCB5DC0081FD0D /* KMGridModel.h */,
+				DA39288F19CCB5DC0081FD0D /* KMGridModel.m */,
 				EFCDDCC419C7AAA300448677 /* KMGridView.h */,
 				EFCDDCC519C7AAA300448677 /* KMGridView.m */,
 				EFCDDCC719C7AB5000448677 /* KMGridCell.h */,
 				EFCDDCC819C7AB5000448677 /* KMGridCell.m */,
+				DA39289119CCE37C0081FD0D /* KMNumPadView.h */,
+				DA39289219CCE37C0081FD0D /* KMNumPadView.m */,
 				EFCDDCA719C7A88C00448677 /* Images.xcassets */,
 				EFCDDC9619C7A88C00448677 /* Supporting Files */,
 			);
@@ -263,8 +273,10 @@
 				EFCDDCC919C7AB5000448677 /* KMGridCell.m in Sources */,
 				EFCDDCC619C7AAA300448677 /* KMGridView.m in Sources */,
 				EFCDDCA619C7A88C00448677 /* KMViewController.m in Sources */,
+				DA39289019CCB5DC0081FD0D /* KMGridModel.m in Sources */,
 				EFCDDCA019C7A88C00448677 /* KMAppDelegate.m in Sources */,
 				EFCDDC9C19C7A88C00448677 /* main.m in Sources */,
+				DA39289319CCE37C0081FD0D /* KMNumPadView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,6 +483,7 @@
 				EFCDDCC019C7A88C00448677 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EFCDDCC119C7A88C00448677 /* Build configuration list for PBXNativeTarget "sudokuTests" */ = {
 			isa = XCConfigurationList;
@@ -479,6 +492,7 @@
 				EFCDDCC319C7A88C00448677 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

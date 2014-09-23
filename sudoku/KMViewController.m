@@ -8,24 +8,18 @@
 
 #import "KMViewController.h"
 #import "KMGridView.h"
+#import "KMNumPadView.h"
+#import "KMGridModel.h"
 
 CGFloat GRID_INSET_RATIO = 0.1;
 
-int initialGrid[9][9] = {
-    {7,0,0,4,2,0,0,0,9},
-    {0,0,9,5,0,0,0,0,4},
-    {0,2,0,6,9,0,5,0,0},
-    {6,5,0,0,0,0,4,3,0},
-    {0,8,0,0,0,6,0,0,7},
-    {0,1,0,0,4,5,6,0,0},
-    {0,0,0,8,6,0,0,0,2},
-    {3,4,0,9,0,0,1,0,0},
-    {8,0,0,3,0,2,7,4,0},
-};
+
 
 @interface KMViewController ()
 {
     KMGridView* _gridView;
+    KMNumPadView* _numPadView;
+    KMGridModel* _gridModel;
 }
 
 @end
@@ -46,16 +40,43 @@ int initialGrid[9][9] = {
     
     _gridView = [[KMGridView alloc] initWithFrame:gridFrame];
     _gridView.backgroundColor = [UIColor blackColor];
+    [_gridView addTarget:self action:@selector(gridPressedRow:Column:)];
+    
     [self.view addSubview:_gridView];
+    
+    CGFloat numPadX = x;
+    CGFloat numPadY = CGRectGetHeight(frame) - size / 3; //TODO
+    CGFloat numPadWidth = size / 10;
+    CGFloat numPadLength = size;
+    CGRect numPadFrame = CGRectMake(numPadX, numPadY, numPadLength, numPadWidth);
+    
+    _numPadView = [[KMNumPadView alloc] initWithFrame:numPadFrame];
+    _numPadView.backgroundColor = [UIColor blackColor];
+    
+    _gridModel = [[KMGridModel alloc] init];
+
+    
+    [self.view addSubview:_numPadView];
     
     [self initializeGrid];
 }
+
+- (void)gridPressedRow:(NSNumber*)row Column:(NSNumber*)col
+{
+    int val = [_numPadView currentNumber];
+    BOOL changed = [_gridModel updateGridRow:[row intValue] Column:[col intValue] Value:val];
+    
+    if (changed) {
+        [_gridView changeValueRow:[row intValue] Column:[col intValue] Value:val];
+    }
+}
+
 
 - (void)initializeGrid
 {
     for (int row = 0; row < 9; row++) {
         for (int col = 0; col < 9; col++) {
-            int val = initialGrid[row][col];
+            int val = [_gridModel getGridValueRow:row Column:col];
             if (val > 0) {
                 [_gridView setInitialValueRow:row Column:col Value:val];
             }

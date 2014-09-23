@@ -15,6 +15,9 @@ CGFloat CELL_INSET_RATIO = 0.05;
     UIButton* _button;
     int _row;
     int _column;
+    
+    id _target;
+    SEL _action;
 }
 
 - (id)initWithFrame:(CGRect)frame Row:(int)row Column:(int)col
@@ -43,18 +46,36 @@ CGFloat CELL_INSET_RATIO = 0.05;
     return self;
 }
 
+- (void)addTarget:(id)target action:(SEL)action
+{
+    _target = target;
+    _action = action;
+}
+
 - (void)setInitialValue:(int)val
 {
     [_button setTitle:[NSString stringWithFormat:@"%d", val] forState:UIControlStateNormal];
     [_button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
-    // TODO Disable button for initial values
+    // Cells for initial values cannot be edited, so we just prevent interacting with the button
+    [_button setEnabled:NO];
+}
+
+- (void)changeValue:(int)val
+{
+    if (val == 0) {
+        [_button setTitle:@"" forState:UIControlStateNormal];
+    }
+    else {
+        [_button setTitle:[NSString stringWithFormat:@"%d", val] forState:UIControlStateNormal];
+        [_button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    }
 }
 
 - (void)buttonPressed:(id)sender
 {
-    NSLog(@"Pressed button at row: %d col: %d", _row, _column);
     [sender setBackgroundColor:[UIColor yellowColor]];
+    [_target performSelector:_action withObject:[NSNumber numberWithInt:_row] withObject:[NSNumber numberWithInt:_column]];
 }
 
 - (void)buttonReleased:(id)sender
