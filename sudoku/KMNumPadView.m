@@ -44,6 +44,7 @@ CGFloat NUMPAD_PADDING_RATIO = 0.1;
             else {
                 [currentButton setTitle:@"X" forState:UIControlStateNormal];
                 [currentButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+                [currentButton setBackgroundColor:[UIColor yellowColor]];
             }
             [self addSubview:currentButton];
             [_buttons addObject:currentButton];
@@ -66,7 +67,6 @@ CGFloat NUMPAD_PADDING_RATIO = 0.1;
     [_buttons[_currentNumber] setBackgroundColor:[UIColor whiteColor]];
     _currentNumber = [sender tag];
     [(id)sender setBackgroundColor:[UIColor yellowColor] ];
-    NSLog(@"%d",_currentNumber);
 }
 
 @end

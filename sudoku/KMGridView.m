@@ -70,7 +70,6 @@ CGFloat PADDING_RATIO = 0.01;
 
 - (void)cellPressedRow:(NSNumber*)row Column:(NSNumber*)col
 {
-    NSLog(@"FROM GRIDVIEW -- Row: %@ Column: %@", row, col);
     [_target performSelector:_action withObject:row withObject:col];
 }
 

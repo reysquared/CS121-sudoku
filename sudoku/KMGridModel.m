@@ -31,35 +31,34 @@ int _currentGrid[9][9]  = {
     {8,0,0,3,0,2,7,4,0},
 };
 
-
-
 @implementation KMGridModel
-
-- (id)init
-{
-    return self;
-}
 
 - (BOOL)checkGridRow:(int)row Column:(int)col Value:(int)val
 {
-    return [self checkRow:row Value:val] &&
+    NSAssert(row >= 0 && row < 9 && col >= 0 && col < 9 && val > 0 && val < 10, @"checkGrid: invalid input");
+    if (_initialGrid[row][col] != 0) {
+        return NO;
+    }
+    return (val == 0) ||
+        ([self checkRow:row Value:val] &&
         [self checkColumn:col Value:val] &&
-        [self checkSubgridRow:row Column:col Value:val];
+        [self checkSubgridRow:row Column:col Value:val]);
 }
 
+//
 - (BOOL)updateGridRow:(int)row Column:(int)col Value:(int)val
 {
-    // TODO ensure not modifying initial grid cells
-    if ([self checkGridRow:(int)row Column:(int)col Value:(int)val] || val == 0) {
+    if ([self checkGridRow:(int)row Column:(int)col Value:(int)val]) {
         _currentGrid[row][col] = val;
         return YES;
     }
-    return NO; // TODO
+    return NO;
 }
 
 - (BOOL)checkRow:(int)row Value:(int)val
 {
-    for (int i = 0; i < 10; i++) {
+    NSAssert(row >= 0 && row < 9 && val > 0 && val < 10, @"checkRow: invalid input");
+    for (int i = 0; i < 9; i++) {
         if (_currentGrid[row][i] == val) {
             return NO;
         }
@@ -69,7 +68,8 @@ int _currentGrid[9][9]  = {
 
 - (BOOL)checkColumn:(int)col Value:(int)val
 {
-    for (int i = 0; i < 10; i++) {
+    NSAssert(col >= 0 && col < 9 && val > 0 && val < 10, @"checkColumn: invalid input");
+    for (int i = 0; i < 9; i++) {
         if (_currentGrid[i][col] == val) {
             return NO;
         }
@@ -79,6 +79,7 @@ int _currentGrid[9][9]  = {
 
 - (BOOL)checkSubgridRow:(int)row Column:(int)col Value:(int)val
 {
+    NSAssert(row >= 0 && row < 9 && col >= 0 && col < 9 && val > 0 && val < 10, @"checkSubgrid: invalid input");
     int startRow = (row / 3) * 3;
     int startCol = (col / 3) * 3;
     for (int i = startRow; i < startRow + 3; i++) {
@@ -93,7 +94,8 @@ int _currentGrid[9][9]  = {
 
 - (int)getGridValueRow:(int)row Column:(int)col
 {
-    return _initialGrid[row][col];
+    NSAssert(row >= 0 && row < 9 && col >= 0 && col < 9, @"getGridValue: out of bounds");
+    return _currentGrid[row][col];
 }
 
 

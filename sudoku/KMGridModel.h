@@ -12,5 +12,10 @@
 
 - (int)getGridValueRow:(int)row Column:(int)col;
 - (BOOL)updateGridRow:(int)row Column:(int)col Value:(int)val;
+// Added below methods for unit testing purposes
+- (BOOL)checkGridRow:(int)row Column:(int)col Value:(int)val;
+- (BOOL)checkRow:(int)row Value:(int)val;
+- (BOOL)checkColumn:(int)col Value:(int)val;
+- (BOOL)checkSubgridRow:(int)row Column:(int)col Value:(int)val;
 
 @end
