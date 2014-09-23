@@ -35,7 +35,7 @@ int _currentGrid[9][9]  = {
 
 - (BOOL)checkGridRow:(int)row Column:(int)col Value:(int)val
 {
-    NSAssert(row >= 0 && row < 9 && col >= 0 && col < 9 && val > 0 && val < 10, @"checkGrid: invalid input");
+    NSAssert(row >= 0 && row < 9 && col >= 0 && col < 9 && val >= 0 && val < 10, @"checkGrid: invalid input");
     if (_initialGrid[row][col] != 0) {
         return NO;
     }
