@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA1B392419D5E3E80005B83A /* grid1.txt in Resources */ = {isa = PBXBuildFile; fileRef = DA1B392219D5E3E80005B83A /* grid1.txt */; };
+		DA1B392519D5E3E80005B83A /* grid2.txt in Resources */ = {isa = PBXBuildFile; fileRef = DA1B392319D5E3E80005B83A /* grid2.txt */; };
+		DA1B392819D5E4690005B83A /* KMGridGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1B392719D5E4690005B83A /* KMGridGenerator.m */; };
 		DA39289019CCB5DC0081FD0D /* KMGridModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DA39288F19CCB5DC0081FD0D /* KMGridModel.m */; };
 		DA39289319CCE37C0081FD0D /* KMNumPadView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA39289219CCE37C0081FD0D /* KMNumPadView.m */; };
 		EFCDDC9019C7A88C00448677 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFCDDC8F19C7A88C00448677 /* Foundation.framework */; };
@@ -38,6 +41,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DA1B392219D5E3E80005B83A /* grid1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = grid1.txt; path = ../grid1.txt; sourceTree = "<group>"; };
+		DA1B392319D5E3E80005B83A /* grid2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = grid2.txt; path = ../grid2.txt; sourceTree = "<group>"; };
+		DA1B392619D5E4690005B83A /* KMGridGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMGridGenerator.h; sourceTree = "<group>"; };
+		DA1B392719D5E4690005B83A /* KMGridGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMGridGenerator.m; sourceTree = "<group>"; };
 		DA39288E19CCB5DC0081FD0D /* KMGridModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMGridModel.h; sourceTree = "<group>"; };
 		DA39288F19CCB5DC0081FD0D /* KMGridModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMGridModel.m; sourceTree = "<group>"; };
 		DA39289119CCE37C0081FD0D /* KMNumPadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMNumPadView.h; sourceTree = "<group>"; };
@@ -129,6 +136,8 @@
 				EFCDDCA119C7A88C00448677 /* Main.storyboard */,
 				EFCDDCA419C7A88C00448677 /* KMViewController.h */,
 				EFCDDCA519C7A88C00448677 /* KMViewController.m */,
+				DA1B392619D5E4690005B83A /* KMGridGenerator.h */,
+				DA1B392719D5E4690005B83A /* KMGridGenerator.m */,
 				DA39288E19CCB5DC0081FD0D /* KMGridModel.h */,
 				DA39288F19CCB5DC0081FD0D /* KMGridModel.m */,
 				EFCDDCC419C7AAA300448677 /* KMGridView.h */,
@@ -146,6 +155,8 @@
 		EFCDDC9619C7A88C00448677 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DA1B392219D5E3E80005B83A /* grid1.txt */,
+				DA1B392319D5E3E80005B83A /* grid2.txt */,
 				EFCDDC9719C7A88C00448677 /* sudoku-Info.plist */,
 				EFCDDC9819C7A88C00448677 /* InfoPlist.strings */,
 				EFCDDC9B19C7A88C00448677 /* main.m */,
@@ -251,7 +262,9 @@
 			files = (
 				EFCDDCA819C7A88C00448677 /* Images.xcassets in Resources */,
 				EFCDDC9A19C7A88C00448677 /* InfoPlist.strings in Resources */,
+				DA1B392419D5E3E80005B83A /* grid1.txt in Resources */,
 				EFCDDCA319C7A88C00448677 /* Main.storyboard in Resources */,
+				DA1B392519D5E3E80005B83A /* grid2.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +284,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EFCDDCC919C7AB5000448677 /* KMGridCell.m in Sources */,
+				DA1B392819D5E4690005B83A /* KMGridGenerator.m in Sources */,
 				EFCDDCC619C7AAA300448677 /* KMGridView.m in Sources */,
 				EFCDDCA619C7A88C00448677 /* KMViewController.m in Sources */,
 				DA39289019CCB5DC0081FD0D /* KMGridModel.m in Sources */,

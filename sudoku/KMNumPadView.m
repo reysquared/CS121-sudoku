@@ -65,7 +65,7 @@ CGFloat NUMPAD_PADDING_RATIO = 0.1;
 - (void)buttonPressed:(id)sender
 {
     [_buttons[_currentNumber] setBackgroundColor:[UIColor whiteColor]];
-    _currentNumber = [sender tag];
+    _currentNumber = (int)[sender tag];
     [(id)sender setBackgroundColor:[UIColor yellowColor] ];
 }
 

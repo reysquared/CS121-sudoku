@@ -30,7 +30,6 @@ CGFloat GRID_INSET_RATIO = 0.1;
 {
     [super viewDidLoad];
     
-    
     CGRect frame = self.view.frame;
     CGFloat x = CGRectGetWidth(frame)*GRID_INSET_RATIO;
     CGFloat y = CGRectGetHeight(frame)*GRID_INSET_RATIO;
