@@ -9,28 +9,6 @@
 #import "KMGridModel.h"
 #import "KMGridGenerator.h"
 
-//int _initialGrid[9][9]  = {
-//    {7,0,0,4,2,0,0,0,9},
-//    {0,0,9,5,0,0,0,0,4},
-//    {0,2,0,6,9,0,5,0,0},
-//    {6,5,0,0,0,0,4,3,0},
-//    {0,8,0,0,0,6,0,0,7},
-//    {0,1,0,0,4,5,6,0,0},
-//    {0,0,0,8,6,0,0,0,2},
-//    {3,4,0,9,0,0,1,0,0},
-//    {8,0,0,3,0,2,7,4,0},
-//};
-//int _currentGrid[9][9]  = {
-//    {7,0,0,4,2,0,0,0,9},
-//    {0,0,9,5,0,0,0,0,4},
-//    {0,2,0,6,9,0,5,0,0},
-//    {6,5,0,0,0,0,4,3,0},
-//    {0,8,0,0,0,6,0,0,7},
-//    {0,1,0,0,4,5,6,0,0},
-//    {0,0,0,8,6,0,0,0,2},
-//    {3,4,0,9,0,0,1,0,0},
-//    {8,0,0,3,0,2,7,4,0},
-//};
 
 @implementation KMGridModel
 {
@@ -44,7 +22,14 @@
 {
     _gridGenerator = [[KMGridGenerator alloc] init];
     
-    NSMutableArray* grid = [_gridGenerator getNewGrid:NO];
+    [self newGrid: YES];
+    
+    return self;
+}
+
+- (void)newGrid:(BOOL)easyMode
+{
+    NSMutableArray* grid = [_gridGenerator getNewGrid:easyMode];
     
     for (int row = 0 ;  row < 9 ; row++) {
         for (int col = 0 ; col < 9; col++) {
@@ -52,7 +37,6 @@
             _currentGrid[row][col] = [[[grid objectAtIndex:row] objectAtIndex:col] intValue];
         }
     }
-    return self;
 }
 
 - (BOOL)checkGridRow:(int)row Column:(int)col Value:(int)val
@@ -118,6 +102,27 @@
 {
     NSAssert(row >= 0 && row < 9 && col >= 0 && col < 9, @"getGridValue: out of bounds");
     return _currentGrid[row][col];
+}
+
+- (void)resetGrid
+{
+    for (int row = 0; row < 9; row++) {
+        for (int col = 0; col < 9; col++){
+            _currentGrid[row][col] = _initialGrid[row][col];
+        }
+    }
+}
+
+- (BOOL)gridComplete
+{
+    for (int row = 0; row < 9; row++) {
+        for (int col = 0; col < 9; col++){
+            if (_currentGrid[row][col] == 0) {
+                return NO;
+            }
+        }
+    }
+    return YES;
 }
 
 

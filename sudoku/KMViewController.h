@@ -10,4 +10,6 @@
 
 @interface KMViewController : UIViewController
 
+- (void)resetGame;
+
 @end

@@ -9,6 +9,18 @@
 #import "KMGridGenerator.h"
 
 @implementation KMGridGenerator
+{
+    int _easyModeProgress;
+    int _hardModeProgress;
+}
+
+- (id) init
+{
+    _easyModeProgress = 0;
+    _hardModeProgress = 0;
+    
+    return self;
+}
 
 - (NSMutableArray*) getNewGrid:(BOOL)easyMode
 {
@@ -38,12 +50,6 @@
         }
         [grid addObject:row];
     }
-    
-    
-    NSNumber* something = [[grid objectAtIndex:0] objectAtIndex:0] ;
-    NSNumber* something2 = [[grid objectAtIndex:0] objectAtIndex:1] ;
-    NSLog(@"%@", something);
-    NSLog(@"%@", something2);
     
     return grid;
 }
