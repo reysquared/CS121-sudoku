@@ -22,14 +22,12 @@
 {
     _gridGenerator = [[KMGridGenerator alloc] init];
     
-    [self newGrid: YES];
-    
     return self;
 }
 
-- (void)newGrid:(BOOL)easyMode
+- (void)newGridMode:(BOOL)easyMode
 {
-    NSMutableArray* grid = [_gridGenerator getNewGrid:easyMode];
+    NSMutableArray* grid = [_gridGenerator getNewGridMode:easyMode];
     
     for (int row = 0 ;  row < 9 ; row++) {
         for (int col = 0 ; col < 9; col++) {

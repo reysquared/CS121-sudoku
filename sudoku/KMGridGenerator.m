@@ -10,34 +10,39 @@
 
 @implementation KMGridGenerator
 {
-    int _easyModeProgress;
-    int _hardModeProgress;
+    NSString* _easyGrids;
+    NSString* _hardGrids;
 }
 
 - (id) init
 {
-    _easyModeProgress = 0;
-    _hardModeProgress = 0;
+    NSString* path1 = [[NSBundle mainBundle] pathForResource:@"grid1" ofType:@"txt"];
+    NSString* path2 = [[NSBundle mainBundle] pathForResource:@"grid2" ofType:@"txt"];
+    
+    NSError* error1;
+    NSError* error2;
+    
+    _easyGrids = [[NSString alloc] initWithContentsOfFile:path1 encoding:NSUTF8StringEncoding error:&error1];
+    _hardGrids = [[NSString alloc] initWithContentsOfFile:path2 encoding:NSUTF8StringEncoding error:&error2];
     
     return self;
 }
 
-- (NSMutableArray*) getNewGrid:(BOOL)easyMode
+- (NSMutableArray*) getNewGridMode:(BOOL)easyMode
 {
-    NSString* path;
+    int randNum;
     
+    NSString* readString;
     if (easyMode) {
-        path = [[NSBundle mainBundle] pathForResource:@"grid1" ofType:@"txt"];
+        readString = _easyGrids;
+        randNum = arc4random_uniform(29999);
     }
     else {
-        path = [[NSBundle mainBundle] pathForResource:@"grid2" ofType:@"txt"];
+        readString = _hardGrids;
+        randNum = arc4random_uniform(30000);
     }
     
-    NSError* error;
-    
-    NSString* readString = [[NSString alloc] initWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
-    
-    NSString* subString = [readString substringWithRange:NSMakeRange(0, 81)];
+    NSString* subString = [readString substringWithRange:NSMakeRange(82*randNum, 81)];
     
     NSMutableArray* grid = [[NSMutableArray alloc] initWithCapacity:9];
     

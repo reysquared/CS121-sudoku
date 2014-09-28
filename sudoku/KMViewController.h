@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface KMViewController : UIViewController
+@interface KMViewController : UIViewController<UIAlertViewDelegate>
 
 - (void)resetGame;
 

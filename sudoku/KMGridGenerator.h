@@ -10,6 +10,6 @@
 
 @interface KMGridGenerator : NSObject
 
-- (NSMutableArray*) getNewGrid:(BOOL)easyMode;
+- (NSMutableArray*) getNewGridMode:(BOOL)easyMode;
 
 @end
