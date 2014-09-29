@@ -87,12 +87,12 @@ CGFloat CELL_INSET_RATIO = 0.05;
 
 - (void)buttonPressed:(id)sender
 {
-    [sender setBackgroundColor:[UIColor yellowColor]];
+    [sender setBackgroundColor:[UIColor colorWithWhite:1.0f alpha:0.5f]];
 }
 
 - (void)buttonReleased:(id)sender
 {
-    [sender setBackgroundColor:[UIColor whiteColor]];
+    [sender setBackgroundColor:[UIColor clearColor]];
     [_target performSelector:_action withObject:[NSNumber numberWithInt:_row] withObject:[NSNumber numberWithInt:_column]];
 
 }

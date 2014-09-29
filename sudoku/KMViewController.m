@@ -17,7 +17,6 @@ CGFloat GRID_INSET_RATIO = 0.1;
 
 #define newGameAlertTag 1
 #define resetAlertTag 2
-#define optionsAlertTag 3
 // TODO?
 
 @interface KMViewController ()
@@ -27,6 +26,8 @@ CGFloat GRID_INSET_RATIO = 0.1;
     KMGridModel* _gridModel;
     UIButton* _resetButton;
     UIButton* _newGameButton;
+    UIButton* _infoButton;
+    UIButton* _muteButton;
     // NSString* _easyModeProgress;
     // NSString* _hardModeProgress;
     BOOL _easyMode;
@@ -35,6 +36,7 @@ CGFloat GRID_INSET_RATIO = 0.1;
     UILabel* _timerLabel;
     NSDate* _startTime;
     BOOL _timerActive;
+    BOOL _musicActive;
     NSInteger _totalScore;
     // NSInteger _currentGridIndex;
 }
@@ -66,18 +68,29 @@ CGFloat GRID_INSET_RATIO = 0.1;
     
     _timerActive = NO;
     
-//    NSString* path1 = [[NSBundle mainBundle] pathForResource:@"progress1" ofType:@"txt"];
-//    NSString* path2 = [[NSBundle mainBundle] pathForResource:@"progress2" ofType:@"txt"];
-//    
-//    NSError* error1;
-//    NSError* error2;
-//    
-//    _easyModeProgress = [[NSString alloc] initWithContentsOfFile:path1 encoding:NSUTF8StringEncoding error:&error1];
-//    _hardModeProgress = [[NSString alloc] initWithContentsOfFile:path2 encoding:NSUTF8StringEncoding error:&error2];
-
+    [self initializeSounds];
+                                  
+    [self.view setBackgroundColor:[[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"parchment2.jpg"]]];
 }
 
--(void)updateTimer:(id)sender
+- (void)initializeSounds
+{
+    NSString* musicPath = [[NSBundle mainBundle] pathForResource:@"bgm" ofType:@"aiff"];
+    NSURL* musicURL = [NSURL fileURLWithPath:musicPath];
+    self.backgroundMusicPlayer = [[AVAudioPlayer alloc]
+                                  initWithContentsOfURL:musicURL error:nil];
+    self.backgroundMusicPlayer.numberOfLoops = -1; // Loop indefinitely
+    [self.backgroundMusicPlayer prepareToPlay];
+    [self.backgroundMusicPlayer play];
+    
+    _musicActive = YES;
+    
+    NSString* illegalMovePath = [[NSBundle mainBundle] pathForResource:@"button_bad" ofType:@"wav"];
+    NSURL* illegalMoveURL = [NSURL fileURLWithPath:illegalMovePath];
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)illegalMoveURL, &_illegalMoveSound);
+}
+
+- (void)updateTimer:(id)sender
 {
     if (_timerActive) {
         NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
@@ -108,7 +121,7 @@ CGFloat GRID_INSET_RATIO = 0.1;
 
     
     _gridView = [[KMGridView alloc] initWithFrame:gridFrame];
-    _gridView.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"parchment.jpg"]];
+    _gridView.backgroundColor = [UIColor clearColor];
     [[_gridView layer] setBorderColor:[UIColor blackColor].CGColor];
     [[_gridView layer] setBorderWidth:3.0f];
     [_gridView addTarget:self action:@selector(gridPressedRow:Column:)];
@@ -122,13 +135,13 @@ CGFloat GRID_INSET_RATIO = 0.1;
     CGFloat size = MIN(CGRectGetWidth(frame), CGRectGetHeight(frame))*(1 - 2 * GRID_INSET_RATIO);
     
     CGFloat numPadX = CGRectGetWidth(frame)*GRID_INSET_RATIO;
-    CGFloat numPadY = CGRectGetHeight(frame) - size / 2.5; //TODO
+    CGFloat numPadY = CGRectGetHeight(frame) - size / 2.3; //TODO
     CGFloat numPadWidth = size / 10;
     CGFloat numPadLength = size;
     CGRect numPadFrame = CGRectMake(numPadX, numPadY, numPadLength, numPadWidth);
     
     _numPadView = [[KMNumPadView alloc] initWithFrame:numPadFrame];
-    _numPadView.backgroundColor = [UIColor blackColor];
+    _numPadView.backgroundColor = [UIColor clearColor];
 
     [self.view addSubview:_numPadView];
 }
@@ -141,44 +154,79 @@ CGFloat GRID_INSET_RATIO = 0.1;
     CGFloat buttonWidth = size / 10;
     CGFloat buttonLength = size / 5;
     CGFloat newGameButtonX = CGRectGetWidth(frame)*GRID_INSET_RATIO;
-    CGFloat newGameButtonY = CGRectGetHeight(frame) - size / 4.5; //TODO
-    CGRect newGameButtonFrame = CGRectMake(newGameButtonX, newGameButtonY, buttonLength, buttonWidth);
+    CGFloat buttonY = CGRectGetHeight(frame) - size / 3.5; //TODO
+    CGRect newGameButtonFrame = CGRectMake(newGameButtonX, buttonY, buttonLength, buttonWidth);
     
     _newGameButton = [[UIButton alloc] initWithFrame:newGameButtonFrame];
-    _newGameButton.backgroundColor = [UIColor whiteColor];
+    _newGameButton.backgroundColor = [UIColor colorWithWhite:1.0f alpha:0.5f];
     _newGameButton.showsTouchWhenHighlighted = YES;
-    [[_newGameButton layer] setBorderWidth:3.0f];
+    [[_newGameButton layer] setBorderWidth:2.5f];
     [[_newGameButton layer] setBorderColor:[UIColor blackColor].CGColor];
+    [[_newGameButton layer] setCornerRadius:12.0f];
     
     [_newGameButton setTitle:@"New Game" forState:UIControlStateNormal];
     [_newGameButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    
-    [_newGameButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchDown];
+    [_newGameButton.titleLabel setFont: [UIFont fontWithName:@"HelveticaNeue-Bold" size:18.0f]];
     [_newGameButton addTarget:self action:@selector(buttonReleased:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside];
 
     
     [self.view addSubview:_newGameButton];
     
     CGFloat resetButtonX = CGRectGetWidth(frame) * GRID_INSET_RATIO + (0.2 * 0.8 / 3) * CGRectGetWidth(frame)  + size / 5;
-    CGFloat resetButtonY = CGRectGetHeight(frame) - size / 4.5; //TODO
 
-    CGRect resetButtonFrame = CGRectMake(resetButtonX, resetButtonY, buttonLength, buttonWidth);
+    CGRect resetButtonFrame = CGRectMake(resetButtonX, buttonY, buttonLength, buttonWidth);
     
     _resetButton = [[UIButton alloc] initWithFrame:resetButtonFrame];
-    _resetButton.backgroundColor = [UIColor whiteColor];
+    _resetButton.backgroundColor = [UIColor colorWithWhite:1.0f alpha:0.5f];
     _resetButton.showsTouchWhenHighlighted = YES;
-    [[_resetButton layer] setBorderWidth:3.0f];
+    [[_resetButton layer] setBorderWidth:2.5f];
     [[_resetButton layer] setBorderColor:[UIColor blackColor].CGColor];
+    [[_resetButton layer] setCornerRadius:12.0f];
     
     [_resetButton setTitle:@"Restart" forState:UIControlStateNormal];
     [_resetButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    
-    
-    [_resetButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchDown];
+    [_resetButton.titleLabel setFont: [UIFont fontWithName:@"HelveticaNeue-Bold" size:18.0f]];
     [_resetButton addTarget:self action:@selector(buttonReleased:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside];
     
     [self.view addSubview:_resetButton];
- 
+    
+    CGFloat infoButtonX = CGRectGetWidth(frame) * GRID_INSET_RATIO + (2 * 0.2 * 0.8 / 3) * CGRectGetWidth(frame)  + 2 * size / 5;
+    
+    CGRect infoButtonFrame = CGRectMake(infoButtonX, buttonY, buttonLength, buttonWidth);
+    
+    _infoButton = [[UIButton alloc] initWithFrame:infoButtonFrame];
+    _infoButton.backgroundColor = [UIColor colorWithWhite:1.0f alpha:0.5f];
+    _infoButton.showsTouchWhenHighlighted = YES;
+    [[_infoButton layer] setBorderWidth:2.5f];
+    [[_infoButton layer] setBorderColor:[UIColor blackColor].CGColor];
+    [[_infoButton layer] setCornerRadius:12.0f];
+    
+    [_infoButton setTitle:@"Info" forState:UIControlStateNormal];
+    [_infoButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_infoButton.titleLabel setFont: [UIFont fontWithName:@"HelveticaNeue-Bold" size:18.0f]];
+    [_infoButton addTarget:self action:@selector(buttonReleased:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside];
+    
+    [self.view addSubview:_infoButton];
+    
+    CGFloat muteButtonX = CGRectGetWidth(frame) * GRID_INSET_RATIO + (0.2 * 0.8) * CGRectGetWidth(frame)  + 3 * size / 5;
+    
+    CGRect muteButtonFrame = CGRectMake(muteButtonX, buttonY, buttonLength, buttonWidth);
+    
+    _muteButton = [[UIButton alloc] initWithFrame:muteButtonFrame];
+    _muteButton.backgroundColor = [UIColor colorWithWhite:1.0f alpha:0.5f];
+    _muteButton.showsTouchWhenHighlighted = YES;
+    [[_muteButton layer] setBorderWidth:2.5f];
+    [[_muteButton layer] setBorderColor:[UIColor blackColor].CGColor];
+    [[_muteButton layer] setCornerRadius:12.0f];
+    
+    [_muteButton setTitle:@"Mute" forState:UIControlStateNormal];
+    [_muteButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_muteButton.titleLabel setFont: [UIFont fontWithName:@"HelveticaNeue-Bold" size:18.0f]];
+    [_muteButton addTarget:self action:@selector(buttonReleased:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside];
+    
+    [self.view addSubview:_muteButton];
+    
+
 }
 
 - (void)createTitle
@@ -195,9 +243,8 @@ CGFloat GRID_INSET_RATIO = 0.1;
     _difficultyLabel = [[UILabel alloc] initWithFrame:difficultyLabelFrame];
     _difficultyLabel.backgroundColor = [UIColor clearColor];
     
-    [_difficultyLabel setText:@"Difficulty:"];
     [_difficultyLabel setTextColor:[UIColor blackColor]];
-    [_difficultyLabel setFont: [UIFont fontWithName:@"HelveticaNeue-Bold" size:16.0f] ];
+    [_difficultyLabel setFont: [UIFont fontWithName:@"HelveticaNeue-Bold" size:16.0f]];
     
     [self.view addSubview:_difficultyLabel];
     
@@ -220,10 +267,22 @@ CGFloat GRID_INSET_RATIO = 0.1;
     [_timerLabel setTextColor:[UIColor blackColor]];
     
     [self.view addSubview:_timerLabel];
-
+    
+    CGFloat titleLabelX = CGRectGetWidth(frame) * GRID_INSET_RATIO + 2.9 * labelLength;
+    CGFloat titleLabelY = CGRectGetHeight(frame) * GRID_INSET_RATIO /2 ;
+    CGRect titleLabelFrame = CGRectMake(titleLabelX, titleLabelY, labelLength * 3, labelWidth);
+    
+    
+    UILabel* titleLabel = [[UILabel alloc] initWithFrame:titleLabelFrame];
+    titleLabel.backgroundColor = [UIColor clearColor];
+    
+    [titleLabel setTextColor:[UIColor blackColor]];
+    [titleLabel setText:@"S U D O K U"];
+    [titleLabel setFont: [UIFont fontWithName:@"Papyrus" size:30.0f]];
+    
+    [self.view addSubview:titleLabel];
+    
 }
-
-
 
 - (void)gridPressedRow:(NSNumber*)row Column:(NSNumber*)col
 {
@@ -231,10 +290,14 @@ CGFloat GRID_INSET_RATIO = 0.1;
     BOOL changed = [_gridModel updateGridRow:[row intValue] Column:[col intValue] Value:val];
     
     if (changed) {
+        // TODO Play successful-move noise
         [_gridView changeValueRow:[row intValue] Column:[col intValue] Value:val];
         if ([_gridModel gridComplete]) {
             [self victoryAchieved];
         }
+    }
+    else {
+        AudioServicesPlaySystemSound(self.illegalMoveSound);
     }
 }
 
@@ -261,39 +324,6 @@ CGFloat GRID_INSET_RATIO = 0.1;
     //[self updateProgress];
 
 }
-
-//- (void)updateProgress
-//{
-//    NSLog(@"asdf");
-//    NSString* path1 = [[NSBundle mainBundle] pathForResource:@"progress1" ofType:@"txt"];
-//    NSString* path2 = [[NSBundle mainBundle] pathForResource:@"progress2" ofType:@"txt"];
-//    
-//    NSError* error1;
-//    NSError* error2;
-//    
-//    if (_easyMode){
-//        NSLog(@"asdasdfasdf");
-//        [_easyModeProgress stringByReplacingCharactersInRange:NSMakeRange(_currentGridIndex, 1) withString:@"1"];
-//        [_easyModeProgress writeToFile:path1 atomically:YES encoding:NSUTF8StringEncoding error:&error1];
-//        NSLog(@"af");
-//        
-//    }
-//    else {
-//        [_hardModeProgress stringByReplacingCharactersInRange:NSMakeRange(_currentGridIndex, 1) withString:@"1"];
-//        [_hardModeProgress writeToFile:path2 atomically:YES encoding:NSUTF8StringEncoding error:&error2];
-//    }
-//}
-//
-//- (void)updateCurrentGridIndex
-//{
-//    if (_easyMode){
-//        _currentGridIndex = [_easyModeProgress rangeOfString:@"0"].location;
-//
-//    }
-//    else {
-//        _currentGridIndex = [_hardModeProgress rangeOfString:@"0"].location;
-//    }
-//}
 
 - (void)initializeGrid
 {
@@ -331,6 +361,31 @@ CGFloat GRID_INSET_RATIO = 0.1;
     [newGameAlert show];
 }
 
+- (void)showInfo
+{
+    
+    UIAlertView* infoMessage = [[UIAlertView alloc] initWithTitle:@"Sudoku!"
+                                                          message:@"The objective of sudoku is to enter a digit from 1 through 9 in each cell, in such a way that each horizontal row, vertical column, and three by three subgrid region contains each number once. \n \nMade by Kevin M and Jeongwoo C \n (c) 2014"
+                                                        delegate:self
+                                               cancelButtonTitle:@"OK"
+                                               otherButtonTitles:nil];
+    [infoMessage show];
+}
+
+- (void)toggleMusic
+{
+    if (_musicActive) {
+        _musicActive = NO;
+        [self.backgroundMusicPlayer pause];
+        [_muteButton setTitle:@"Unmute" forState:UIControlStateNormal];
+    }
+    else {
+        _musicActive = YES;
+        [self.backgroundMusicPlayer play];
+        [_muteButton setTitle:@"Mute" forState:UIControlStateNormal];
+    }
+}
+
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
     if (alertView.tag == newGameAlertTag) {
@@ -348,14 +403,7 @@ CGFloat GRID_INSET_RATIO = 0.1;
         else {
             return;
         }
-        
-//        [self updateCurrentGridIndex];
-//        
-//        if (_currentGridIndex == NSNotFound) {
-//            [self outOfPuzzles];
-//            return;
-//        }
-//
+        [_difficultyLabel setText:@"Difficulty:"];
         [_gridModel newGridMode:_easyMode];
         
         _startTime = [NSDate date];
@@ -363,6 +411,14 @@ CGFloat GRID_INSET_RATIO = 0.1;
         
         [self initializeGrid];
         [_resetButton setEnabled:YES];
+        
+        CATransition* transition = [CATransition animation];
+        transition.type = kCATransitionPush;
+        transition.duration = 1;
+        transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+        
+        [self.view.layer addAnimation:transition forKey:nil];
+        
     }
     else if (alertView.tag == resetAlertTag) {
         if (buttonIndex == 1) {
@@ -370,31 +426,36 @@ CGFloat GRID_INSET_RATIO = 0.1;
             _startTime = [NSDate date];
             [self initializeGrid];
         }
+        else {
+            return;
+        }
+        
+        CATransition* transition = [CATransition animation];
+        transition.type = kCATransitionFade;
+        transition.duration = 1;
+        transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+        
+        [self.view.layer addAnimation:transition forKey:nil];
     }
     
     
 }
 
-- (void)outOfPuzzles
-{
-    
-}
-
-- (void)buttonPressed:(id)sender
-{
-    [sender setBackgroundColor:[UIColor magentaColor]];
-}
-
 - (void)buttonReleased:(id)sender
 {
-    [sender setBackgroundColor:[UIColor whiteColor]];
-    
     if (sender == _newGameButton) {
         [self startNewGame];
     }
     else if (sender == _resetButton) {
         [self resetGame];
     }
+    else if (sender == _infoButton) {
+        [self showInfo];
+    }
+    else if (sender == _muteButton) {
+        [self toggleMusic];
+    }
+    
 }
 
 

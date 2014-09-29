@@ -8,7 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@import AVFoundation;
+
 @interface KMViewController : UIViewController<UIAlertViewDelegate>
+
+@property (strong, nonatomic) AVAudioPlayer* backgroundMusicPlayer;
+@property (assign) SystemSoundID illegalMoveSound;
+@property (nonatomic) SystemSoundID okayMoveSound;
 
 - (void)resetGame;
 

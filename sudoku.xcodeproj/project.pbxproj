@@ -16,6 +16,10 @@
 		DAAAB0FC19D761BA0092CE6A /* TemplateIcon2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAAAB0FA19D761BA0092CE6A /* TemplateIcon2x.png */; };
 		DAAAB0FE19D761CD0092CE6A /* progress2.txt in Resources */ = {isa = PBXBuildFile; fileRef = DAAAB0FD19D761CD0092CE6A /* progress2.txt */; };
 		DAAAB10219D793D20092CE6A /* parchment.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DAAAB10119D793D20092CE6A /* parchment.jpg */; };
+		DAAAB10419D8F87C0092CE6A /* parchment2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DAAAB10319D8F87C0092CE6A /* parchment2.jpg */; };
+		DAAAB10819D90E320092CE6A /* bgm.aiff in Resources */ = {isa = PBXBuildFile; fileRef = DAAAB10519D90E320092CE6A /* bgm.aiff */; };
+		DAAAB10919D90E320092CE6A /* button_bad.wav in Resources */ = {isa = PBXBuildFile; fileRef = DAAAB10619D90E320092CE6A /* button_bad.wav */; };
+		DAAAB10A19D90E320092CE6A /* victory.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DAAAB10719D90E320092CE6A /* victory.mp3 */; };
 		EFCDDC9019C7A88C00448677 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFCDDC8F19C7A88C00448677 /* Foundation.framework */; };
 		EFCDDC9219C7A88C00448677 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFCDDC9119C7A88C00448677 /* CoreGraphics.framework */; };
 		EFCDDC9419C7A88C00448677 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFCDDC9319C7A88C00448677 /* UIKit.framework */; };
@@ -57,6 +61,10 @@
 		DAAAB0FA19D761BA0092CE6A /* TemplateIcon2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TemplateIcon2x.png; sourceTree = "<group>"; };
 		DAAAB0FD19D761CD0092CE6A /* progress2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = progress2.txt; sourceTree = "<group>"; };
 		DAAAB10119D793D20092CE6A /* parchment.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = parchment.jpg; path = sudoku/parchment.jpg; sourceTree = "<group>"; };
+		DAAAB10319D8F87C0092CE6A /* parchment2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = parchment2.jpg; path = sudoku/parchment2.jpg; sourceTree = "<group>"; };
+		DAAAB10519D90E320092CE6A /* bgm.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; name = bgm.aiff; path = sudoku/bgm.aiff; sourceTree = "<group>"; };
+		DAAAB10619D90E320092CE6A /* button_bad.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = button_bad.wav; path = sudoku/button_bad.wav; sourceTree = "<group>"; };
+		DAAAB10719D90E320092CE6A /* victory.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = victory.mp3; path = sudoku/victory.mp3; sourceTree = "<group>"; };
 		EFCDDC8C19C7A88C00448677 /* sudoku.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sudoku.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFCDDC8F19C7A88C00448677 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		EFCDDC9119C7A88C00448677 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -106,10 +114,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DAAAB10B19D917EF0092CE6A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DAAAB10519D90E320092CE6A /* bgm.aiff */,
+				DAAAB10619D90E320092CE6A /* button_bad.wav */,
+				DAAAB10719D90E320092CE6A /* victory.mp3 */,
+				DAAAB10119D793D20092CE6A /* parchment.jpg */,
+				DAAAB10319D8F87C0092CE6A /* parchment2.jpg */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		EFCDDC8319C7A88B00448677 = {
 			isa = PBXGroup;
 			children = (
-				DAAAB10119D793D20092CE6A /* parchment.jpg */,
+				DAAAB10B19D917EF0092CE6A /* Resources */,
 				EFCDDC9519C7A88C00448677 /* sudoku */,
 				EFCDDCB419C7A88C00448677 /* sudokuTests */,
 				EFCDDC8E19C7A88C00448677 /* Frameworks */,
@@ -275,8 +295,12 @@
 				EFCDDCA819C7A88C00448677 /* Images.xcassets in Resources */,
 				DAAAB0FB19D761BA0092CE6A /* progress1.txt in Resources */,
 				DAAAB10219D793D20092CE6A /* parchment.jpg in Resources */,
+				DAAAB10A19D90E320092CE6A /* victory.mp3 in Resources */,
 				DAAAB0FE19D761CD0092CE6A /* progress2.txt in Resources */,
+				DAAAB10919D90E320092CE6A /* button_bad.wav in Resources */,
 				EFCDDC9A19C7A88C00448677 /* InfoPlist.strings in Resources */,
+				DAAAB10419D8F87C0092CE6A /* parchment2.jpg in Resources */,
+				DAAAB10819D90E320092CE6A /* bgm.aiff in Resources */,
 				DA1B392419D5E3E80005B83A /* grid1.txt in Resources */,
 				EFCDDCA319C7A88C00448677 /* Main.storyboard in Resources */,
 				DA1B392519D5E3E80005B83A /* grid2.txt in Resources */,
