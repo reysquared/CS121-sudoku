@@ -37,6 +37,7 @@
     return self;
 }
 
+// Generate new grid of the selected difficulty
 - (NSMutableArray*) getNewGridMode:(BOOL)easyMode
 {
     NSString* readString;

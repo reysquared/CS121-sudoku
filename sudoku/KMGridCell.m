@@ -58,6 +58,7 @@ CGFloat CELL_INSET_RATIO = 0.05;
     _action = action;
 }
 
+// Set initial values in the grid view.  If values are non-zero (squares which start filled in), the button is disabled.
 - (void)setInitialValue:(int)val
 {
     if (val == 0)

@@ -28,8 +28,6 @@ CGFloat GRID_INSET_RATIO = 0.1;
     UIButton* _newGameButton;
     UIButton* _infoButton;
     UIButton* _muteButton;
-    // NSString* _easyModeProgress;
-    // NSString* _hardModeProgress;
     BOOL _easyMode;
     UILabel* _difficultyLabel;
     UILabel* _difficultyValueLabel;
@@ -38,7 +36,6 @@ CGFloat GRID_INSET_RATIO = 0.1;
     BOOL _timerActive;
     BOOL _musicActive;
     NSInteger _totalScore;
-    // NSInteger _currentGridIndex;
 }
 
 @end
@@ -71,8 +68,15 @@ CGFloat GRID_INSET_RATIO = 0.1;
     [self initializeSounds];
                                   
     [self.view setBackgroundColor:[[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"parchment2.jpg"]]];
+    
+    // Fade-in transition for game screen
+    CATransition* transition = [CATransition animation];
+    transition.type = kCATransitionFade;
+    transition.duration = 2;
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
 }
 
+// Initialization code for background music
 - (void)initializeSounds
 {
     NSString* musicPath = [[NSBundle mainBundle] pathForResource:@"bgm" ofType:@"aiff"];
@@ -86,6 +90,7 @@ CGFloat GRID_INSET_RATIO = 0.1;
     _musicActive = YES;
 }
 
+// Update the timer label
 - (void)updateTimer:(id)sender
 {
     if (_timerActive) {
@@ -106,6 +111,7 @@ CGFloat GRID_INSET_RATIO = 0.1;
     
 }
 
+// Create the view that represents the current state of the sudoku grid
 - (void)createGridView
 {
     CGRect frame = self.view.frame;
@@ -125,6 +131,7 @@ CGFloat GRID_INSET_RATIO = 0.1;
     [self.view addSubview:_gridView];
 }
 
+// Create the numpad buttons
 - (void)createNumPadView
 {
     CGRect frame = self.view.frame;
@@ -142,6 +149,7 @@ CGFloat GRID_INSET_RATIO = 0.1;
     [self.view addSubview:_numPadView];
 }
 
+// Create buttons for the sudoku menu that aren't part of the numpad
 - (void)createMenuButtons
 {
     CGRect frame = self.view.frame;
@@ -225,6 +233,7 @@ CGFloat GRID_INSET_RATIO = 0.1;
 
 }
 
+// Generate non-button text labels
 - (void)createTitle
 {
     CGRect frame = self.view.frame;
@@ -280,6 +289,7 @@ CGFloat GRID_INSET_RATIO = 0.1;
     
 }
 
+// Catch grid presses for player moves
 - (void)gridPressedRow:(NSNumber*)row Column:(NSNumber*)col
 {
     int val = [_numPadView currentNumber];
@@ -294,6 +304,7 @@ CGFloat GRID_INSET_RATIO = 0.1;
     }
 }
 
+// Show victory message and score
 - (void)victoryAchieved
 {
     _timerActive = NO;
@@ -318,6 +329,7 @@ CGFloat GRID_INSET_RATIO = 0.1;
 
 }
 
+// Retrieve values from the grid model and set them in the grid view
 - (void)initializeGrid
 {
     for (int row = 0; row < 9; row++) {
@@ -328,6 +340,7 @@ CGFloat GRID_INSET_RATIO = 0.1;
     }
 }
 
+// Clear non-initial cells
 - (void)resetGame
 {
 
@@ -341,6 +354,7 @@ CGFloat GRID_INSET_RATIO = 0.1;
     [resetAlert show];
 }
 
+// Show new game prompt, generate new grid based on selected difficulty
 - (void)startNewGame
 {
     UIAlertView* newGameAlert = [[UIAlertView alloc] initWithTitle:@"New Game"
@@ -354,6 +368,7 @@ CGFloat GRID_INSET_RATIO = 0.1;
     [newGameAlert show];
 }
 
+// Show rules and credits in alertView
 - (void)showInfo
 {
     
@@ -365,6 +380,7 @@ CGFloat GRID_INSET_RATIO = 0.1;
     [infoMessage show];
 }
 
+// Mute and unmute the background music
 - (void)toggleMusic
 {
     if (_musicActive) {
@@ -379,6 +395,7 @@ CGFloat GRID_INSET_RATIO = 0.1;
     }
 }
 
+// Handle responses to multi-button alertViews
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
     if (alertView.tag == newGameAlertTag) {
@@ -434,6 +451,7 @@ CGFloat GRID_INSET_RATIO = 0.1;
     
 }
 
+// Catch menu button presses
 - (void)buttonReleased:(id)sender
 {
     if (sender == _newGameButton) {
