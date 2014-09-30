@@ -12,4 +12,7 @@
 
 - (NSMutableArray*) getNewGridMode:(BOOL)easyMode;
 
+// Added method for unit testing
+- (id) initWithStringEasy:(NSString*)easyGrid Hard:(NSString*)hardGrid;
+
 @end

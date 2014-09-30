@@ -20,10 +20,22 @@
 
 - (id)init
 {
-    _gridGenerator = [[KMGridGenerator alloc] init];
-    
+    self = [super init];
+    if (self) {
+        _gridGenerator = [[KMGridGenerator alloc] init];
+    }
     return self;
 }
+
+- (id) initWithStringEasy:(NSString*)easyGrid Hard:(NSString*)hardGrid
+{
+    self = [super init];
+    if (self) {
+        _gridGenerator = [[KMGridGenerator alloc] initWithStringEasy:easyGrid Hard:hardGrid];
+    }
+    return self;
+}
+
 
 - (void)newGridMode:(BOOL)easyMode
 {

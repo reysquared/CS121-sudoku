@@ -28,19 +28,26 @@
     return self;
 }
 
+// For unit testing purposes
+- (id) initWithStringEasy:(NSString*)easyGrid Hard:(NSString*)hardGrid
+{
+    _easyGrids = easyGrid;
+    _hardGrids = hardGrid;
+    
+    return self;
+}
+
 - (NSMutableArray*) getNewGridMode:(BOOL)easyMode
 {
-    int randNum;
-    
     NSString* readString;
     if (easyMode) {
         readString = _easyGrids;
-        randNum = arc4random_uniform(29999);
     }
     else {
         readString = _hardGrids;
-        randNum = arc4random_uniform(30000);
     }
+    
+    int randNum = arc4random_uniform((int)[readString length]/82);
     
     NSString* subString = [readString substringWithRange:NSMakeRange(82*randNum, 81)];
     

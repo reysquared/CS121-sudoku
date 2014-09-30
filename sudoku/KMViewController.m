@@ -84,10 +84,6 @@ CGFloat GRID_INSET_RATIO = 0.1;
     [self.backgroundMusicPlayer play];
     
     _musicActive = YES;
-    
-    NSString* illegalMovePath = [[NSBundle mainBundle] pathForResource:@"button_bad" ofType:@"wav"];
-    NSURL* illegalMoveURL = [NSURL fileURLWithPath:illegalMovePath];
-    AudioServicesCreateSystemSoundID((__bridge CFURLRef)illegalMoveURL, &_illegalMoveSound);
 }
 
 - (void)updateTimer:(id)sender
@@ -290,14 +286,11 @@ CGFloat GRID_INSET_RATIO = 0.1;
     BOOL changed = [_gridModel updateGridRow:[row intValue] Column:[col intValue] Value:val];
     
     if (changed) {
-        // TODO Play successful-move noise
+        // TODO Play successful-move noise?
         [_gridView changeValueRow:[row intValue] Column:[col intValue] Value:val];
         if ([_gridModel gridComplete]) {
             [self victoryAchieved];
         }
-    }
-    else {
-        AudioServicesPlaySystemSound(self.illegalMoveSound);
     }
 }
 
@@ -315,7 +308,7 @@ CGFloat GRID_INSET_RATIO = 0.1;
     _totalScore += score;
     
     UIAlertView* victoryAlert = [[UIAlertView alloc] initWithTitle:@"You Win!"
-                                                           message:[NSString stringWithFormat:@"You solved the puzzle in %@ for a score of %ld.\nRunning score: %ld", [_timerLabel text], score, _totalScore]
+                                                           message:[NSString stringWithFormat:@"You solved the puzzle in %@ for a score of %ld.\nRunning score: %ld", [_timerLabel text], (long)score, (long)_totalScore]
                                                           delegate:self
                                                  cancelButtonTitle:@"OK"
                                                  otherButtonTitles:nil];
@@ -365,7 +358,7 @@ CGFloat GRID_INSET_RATIO = 0.1;
 {
     
     UIAlertView* infoMessage = [[UIAlertView alloc] initWithTitle:@"Sudoku!"
-                                                          message:@"The objective of sudoku is to enter a digit from 1 through 9 in each cell, in such a way that each horizontal row, vertical column, and three by three subgrid region contains each number once. \n \nMade by Kevin M and Jeongwoo C \n (c) 2014"
+                                                          message:@"The objective of sudoku is to enter a digit from 1 through 9 in each cell, in such a way that each horizontal row, vertical column, and three by three subgrid region contains each number once. \n \nMade by Kevin M and Jeongwoo C \n (c) 2014\nSound credits: keinzweiter on www.freesound.org\nBackground texture: www.myfreetextures.com"
                                                         delegate:self
                                                cancelButtonTitle:@"OK"
                                                otherButtonTitles:nil];

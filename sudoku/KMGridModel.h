@@ -20,5 +20,6 @@
 - (BOOL)checkRow:(int)row Value:(int)val;
 - (BOOL)checkColumn:(int)col Value:(int)val;
 - (BOOL)checkSubgridRow:(int)row Column:(int)col Value:(int)val;
+- (id) initWithStringEasy:(NSString*)easyGrid Hard:(NSString*)hardGrid;
 
 @end
