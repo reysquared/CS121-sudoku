@@ -7,6 +7,7 @@
 //
 
 #import "KMNumPadView.h"
+#import <QuartzCore/QuartzCore.h>
 
 CGFloat NUMPAD_PADDING_RATIO = 0.1;
 
@@ -36,7 +37,11 @@ CGFloat NUMPAD_PADDING_RATIO = 0.1;
             
             CGRect buttonFrame = CGRectMake(inset, paddingSize, buttonWidth, buttonHeight);
             UIButton* currentButton = [[UIButton alloc] initWithFrame:buttonFrame];
-            currentButton.backgroundColor = [UIColor whiteColor];
+            currentButton.backgroundColor = [UIColor clearColor];
+            [[currentButton layer] setBorderColor:[UIColor blackColor].CGColor];
+            [[currentButton layer] setBorderWidth:2.5f];
+            [[currentButton layer] setCornerRadius:8.0f];
+            [currentButton.titleLabel setFont: [UIFont fontWithName:@"HelveticaNeue-Bold" size:20.0f]];
             if (i > 0) {
                 [currentButton setTitle:[NSString stringWithFormat:@"%d", i] forState:UIControlStateNormal];
                 [currentButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -44,7 +49,7 @@ CGFloat NUMPAD_PADDING_RATIO = 0.1;
             else {
                 [currentButton setTitle:@"X" forState:UIControlStateNormal];
                 [currentButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-                [currentButton setBackgroundColor:[UIColor yellowColor]];
+                [currentButton setBackgroundColor:[UIColor colorWithWhite:1.0f alpha:0.5f]];
             }
             [self addSubview:currentButton];
             [_buttons addObject:currentButton];
@@ -64,9 +69,9 @@ CGFloat NUMPAD_PADDING_RATIO = 0.1;
 
 - (void)buttonPressed:(id)sender
 {
-    [_buttons[_currentNumber] setBackgroundColor:[UIColor whiteColor]];
-    _currentNumber = [sender tag];
-    [(id)sender setBackgroundColor:[UIColor yellowColor] ];
+    [_buttons[_currentNumber] setBackgroundColor:[UIColor clearColor]];
+    _currentNumber = (int)[sender tag];
+    [(id)sender setBackgroundColor:[UIColor colorWithWhite:1.0f alpha:0.5f]];
 }
 
 @end

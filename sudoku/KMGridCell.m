@@ -7,6 +7,8 @@
 //
 
 #import "KMGridCell.h"
+#import <QuartzCore/QuartzCore.h>
+
 
 CGFloat CELL_INSET_RATIO = 0.05;
 
@@ -39,6 +41,10 @@ CGFloat CELL_INSET_RATIO = 0.05;
         
         [_button addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchDown];
         [_button addTarget:self action:@selector(buttonReleased:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside];
+        [_button setEnabled:NO];
+        [_button setBackgroundColor:[UIColor clearColor]];
+        [[_button layer] setBorderColor:[UIColor blackColor].CGColor];
+        [[_button layer] setBorderWidth:2.0f];
         
         [self addSubview:_button];
     }
@@ -52,13 +58,22 @@ CGFloat CELL_INSET_RATIO = 0.05;
     _action = action;
 }
 
+// Set initial values in the grid view.  If values are non-zero (squares which start filled in), the button is disabled.
 - (void)setInitialValue:(int)val
 {
-    [_button setTitle:[NSString stringWithFormat:@"%d", val] forState:UIControlStateNormal];
-    [_button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    
-    // Cells for initial values cannot be edited, so we just prevent interacting with the button
-    [_button setEnabled:NO];
+    if (val == 0)
+    {
+        [_button setTitle:@"" forState:UIControlStateNormal];
+        [_button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        [_button setEnabled:YES];
+    }
+    else {
+        [_button setTitle:[NSString stringWithFormat:@"%d", val] forState:UIControlStateNormal];
+        [_button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        
+        // Cells for initial values cannot be edited, so we just prevent interacting with the button
+        [_button setEnabled:NO];
+    }
 }
 
 - (void)changeValue:(int)val
@@ -68,19 +83,19 @@ CGFloat CELL_INSET_RATIO = 0.05;
     }
     else {
         [_button setTitle:[NSString stringWithFormat:@"%d", val] forState:UIControlStateNormal];
-        [_button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     }
 }
 
 - (void)buttonPressed:(id)sender
 {
-    [sender setBackgroundColor:[UIColor yellowColor]];
-    [_target performSelector:_action withObject:[NSNumber numberWithInt:_row] withObject:[NSNumber numberWithInt:_column]];
+    [sender setBackgroundColor:[UIColor colorWithWhite:1.0f alpha:0.5f]];
 }
 
 - (void)buttonReleased:(id)sender
 {
-    [sender setBackgroundColor:[UIColor whiteColor]];
+    [sender setBackgroundColor:[UIColor clearColor]];
+    [_target performSelector:_action withObject:[NSNumber numberWithInt:_row] withObject:[NSNumber numberWithInt:_column]];
+
 }
 
 @end

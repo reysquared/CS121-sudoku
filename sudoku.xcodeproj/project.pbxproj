@@ -7,8 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA1B392419D5E3E80005B83A /* grid1.txt in Resources */ = {isa = PBXBuildFile; fileRef = DA1B392219D5E3E80005B83A /* grid1.txt */; };
+		DA1B392519D5E3E80005B83A /* grid2.txt in Resources */ = {isa = PBXBuildFile; fileRef = DA1B392319D5E3E80005B83A /* grid2.txt */; };
+		DA1B392819D5E4690005B83A /* KMGridGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1B392719D5E4690005B83A /* KMGridGenerator.m */; };
 		DA39289019CCB5DC0081FD0D /* KMGridModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DA39288F19CCB5DC0081FD0D /* KMGridModel.m */; };
 		DA39289319CCE37C0081FD0D /* KMNumPadView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA39289219CCE37C0081FD0D /* KMNumPadView.m */; };
+		DAAAB0FB19D761BA0092CE6A /* progress1.txt in Resources */ = {isa = PBXBuildFile; fileRef = DAAAB0F919D761BA0092CE6A /* progress1.txt */; };
+		DAAAB0FC19D761BA0092CE6A /* TemplateIcon2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAAAB0FA19D761BA0092CE6A /* TemplateIcon2x.png */; };
+		DAAAB0FE19D761CD0092CE6A /* progress2.txt in Resources */ = {isa = PBXBuildFile; fileRef = DAAAB0FD19D761CD0092CE6A /* progress2.txt */; };
+		DAAAB10219D793D20092CE6A /* parchment.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DAAAB10119D793D20092CE6A /* parchment.jpg */; };
+		DAAAB10419D8F87C0092CE6A /* parchment2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DAAAB10319D8F87C0092CE6A /* parchment2.jpg */; };
+		DAAAB10819D90E320092CE6A /* bgm.aiff in Resources */ = {isa = PBXBuildFile; fileRef = DAAAB10519D90E320092CE6A /* bgm.aiff */; };
+		DAAAB10A19D90E320092CE6A /* victory.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DAAAB10719D90E320092CE6A /* victory.mp3 */; };
 		EFCDDC9019C7A88C00448677 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFCDDC8F19C7A88C00448677 /* Foundation.framework */; };
 		EFCDDC9219C7A88C00448677 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFCDDC9119C7A88C00448677 /* CoreGraphics.framework */; };
 		EFCDDC9419C7A88C00448677 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFCDDC9319C7A88C00448677 /* UIKit.framework */; };
@@ -38,10 +48,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DA1B392219D5E3E80005B83A /* grid1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = grid1.txt; path = ../grid1.txt; sourceTree = "<group>"; };
+		DA1B392319D5E3E80005B83A /* grid2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = grid2.txt; path = ../grid2.txt; sourceTree = "<group>"; };
+		DA1B392619D5E4690005B83A /* KMGridGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMGridGenerator.h; sourceTree = "<group>"; };
+		DA1B392719D5E4690005B83A /* KMGridGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMGridGenerator.m; sourceTree = "<group>"; };
 		DA39288E19CCB5DC0081FD0D /* KMGridModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMGridModel.h; sourceTree = "<group>"; };
 		DA39288F19CCB5DC0081FD0D /* KMGridModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMGridModel.m; sourceTree = "<group>"; };
 		DA39289119CCE37C0081FD0D /* KMNumPadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMNumPadView.h; sourceTree = "<group>"; };
 		DA39289219CCE37C0081FD0D /* KMNumPadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMNumPadView.m; sourceTree = "<group>"; };
+		DAAAB0F919D761BA0092CE6A /* progress1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = progress1.txt; sourceTree = "<group>"; };
+		DAAAB0FA19D761BA0092CE6A /* TemplateIcon2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TemplateIcon2x.png; sourceTree = "<group>"; };
+		DAAAB0FD19D761CD0092CE6A /* progress2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = progress2.txt; sourceTree = "<group>"; };
+		DAAAB10119D793D20092CE6A /* parchment.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = parchment.jpg; path = sudoku/parchment.jpg; sourceTree = "<group>"; };
+		DAAAB10319D8F87C0092CE6A /* parchment2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = parchment2.jpg; path = sudoku/parchment2.jpg; sourceTree = "<group>"; };
+		DAAAB10519D90E320092CE6A /* bgm.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; name = bgm.aiff; path = sudoku/bgm.aiff; sourceTree = "<group>"; };
+		DAAAB10719D90E320092CE6A /* victory.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = victory.mp3; path = sudoku/victory.mp3; sourceTree = "<group>"; };
 		EFCDDC8C19C7A88C00448677 /* sudoku.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sudoku.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFCDDC8F19C7A88C00448677 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		EFCDDC9119C7A88C00448677 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -91,9 +112,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DAAAB10B19D917EF0092CE6A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DAAAB10519D90E320092CE6A /* bgm.aiff */,
+				DAAAB10719D90E320092CE6A /* victory.mp3 */,
+				DAAAB10119D793D20092CE6A /* parchment.jpg */,
+				DAAAB10319D8F87C0092CE6A /* parchment2.jpg */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		EFCDDC8319C7A88B00448677 = {
 			isa = PBXGroup;
 			children = (
+				DAAAB10B19D917EF0092CE6A /* Resources */,
 				EFCDDC9519C7A88C00448677 /* sudoku */,
 				EFCDDCB419C7A88C00448677 /* sudokuTests */,
 				EFCDDC8E19C7A88C00448677 /* Frameworks */,
@@ -129,6 +162,8 @@
 				EFCDDCA119C7A88C00448677 /* Main.storyboard */,
 				EFCDDCA419C7A88C00448677 /* KMViewController.h */,
 				EFCDDCA519C7A88C00448677 /* KMViewController.m */,
+				DA1B392619D5E4690005B83A /* KMGridGenerator.h */,
+				DA1B392719D5E4690005B83A /* KMGridGenerator.m */,
 				DA39288E19CCB5DC0081FD0D /* KMGridModel.h */,
 				DA39288F19CCB5DC0081FD0D /* KMGridModel.m */,
 				EFCDDCC419C7AAA300448677 /* KMGridView.h */,
@@ -146,10 +181,15 @@
 		EFCDDC9619C7A88C00448677 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DA1B392219D5E3E80005B83A /* grid1.txt */,
+				DA1B392319D5E3E80005B83A /* grid2.txt */,
 				EFCDDC9719C7A88C00448677 /* sudoku-Info.plist */,
 				EFCDDC9819C7A88C00448677 /* InfoPlist.strings */,
 				EFCDDC9B19C7A88C00448677 /* main.m */,
 				EFCDDC9D19C7A88C00448677 /* sudoku-Prefix.pch */,
+				DAAAB0F919D761BA0092CE6A /* progress1.txt */,
+				DAAAB0FA19D761BA0092CE6A /* TemplateIcon2x.png */,
+				DAAAB0FD19D761CD0092CE6A /* progress2.txt */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -182,6 +222,7 @@
 				EFCDDC8819C7A88B00448677 /* Sources */,
 				EFCDDC8919C7A88B00448677 /* Frameworks */,
 				EFCDDC8A19C7A88B00448677 /* Resources */,
+				DAAAB10C19DA31830092CE6A /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -250,8 +291,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				EFCDDCA819C7A88C00448677 /* Images.xcassets in Resources */,
+				DAAAB0FB19D761BA0092CE6A /* progress1.txt in Resources */,
+				DAAAB10219D793D20092CE6A /* parchment.jpg in Resources */,
+				DAAAB10A19D90E320092CE6A /* victory.mp3 in Resources */,
+				DAAAB0FE19D761CD0092CE6A /* progress2.txt in Resources */,
 				EFCDDC9A19C7A88C00448677 /* InfoPlist.strings in Resources */,
+				DAAAB10419D8F87C0092CE6A /* parchment2.jpg in Resources */,
+				DAAAB10819D90E320092CE6A /* bgm.aiff in Resources */,
+				DA1B392419D5E3E80005B83A /* grid1.txt in Resources */,
 				EFCDDCA319C7A88C00448677 /* Main.storyboard in Resources */,
+				DA1B392519D5E3E80005B83A /* grid2.txt in Resources */,
+				DAAAB0FC19D761BA0092CE6A /* TemplateIcon2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,12 +315,29 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		DAAAB10C19DA31830092CE6A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = XcodeCoverage/exportenv.sh;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		EFCDDC8819C7A88B00448677 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				EFCDDCC919C7AB5000448677 /* KMGridCell.m in Sources */,
+				DA1B392819D5E4690005B83A /* KMGridGenerator.m in Sources */,
 				EFCDDCC619C7AAA300448677 /* KMGridView.m in Sources */,
 				EFCDDCA619C7A88C00448677 /* KMViewController.m in Sources */,
 				DA39289019CCB5DC0081FD0D /* KMGridModel.m in Sources */,
@@ -346,6 +413,8 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
