@@ -63,7 +63,6 @@
         }
         [grid addObject:row];
     }
-    
     return grid;
 }
 

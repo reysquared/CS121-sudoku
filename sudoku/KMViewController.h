@@ -11,9 +11,7 @@
 @import AVFoundation;
 
 @interface KMViewController : UIViewController<UIAlertViewDelegate>
-
 @property (strong, nonatomic) AVAudioPlayer* backgroundMusicPlayer;
-
 - (void)resetGame;
 
 @end

@@ -48,7 +48,6 @@ CGFloat CELL_INSET_RATIO = 0.05;
         
         [self addSubview:_button];
     }
-    
     return self;
 }
 
@@ -95,7 +94,6 @@ CGFloat CELL_INSET_RATIO = 0.05;
 {
     [sender setBackgroundColor:[UIColor clearColor]];
     [_target performSelector:_action withObject:[NSNumber numberWithInt:_row] withObject:[NSNumber numberWithInt:_column]];
-
 }
 
 @end

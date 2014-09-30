@@ -10,14 +10,11 @@
 #import "KMGridView.h"
 #import "KMNumPadView.h"
 #import "KMGridModel.h"
-
 #import <QuartzCore/QuartzCore.h>
 
 CGFloat GRID_INSET_RATIO = 0.1;
-
 #define newGameAlertTag 1
 #define resetAlertTag 2
-// TODO?
 
 @interface KMViewController ()
 {
@@ -97,18 +94,13 @@ CGFloat GRID_INSET_RATIO = 0.1;
         NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setTimeStyle: NSDateFormatterShortStyle];
         
-        
-        
         NSTimeInterval secondsElapsed = [[NSDate date] timeIntervalSinceDate:_startTime];
-        
-        
         
         NSString* timeElapsed = [NSString stringWithFormat:@"%li:%02li:%02li", lround(floor(secondsElapsed /3600.)),
                                  lround(floor(secondsElapsed /60.)) % 60,
                                  lround(floor(secondsElapsed)) % 60];
         [_timerLabel setText:timeElapsed];
     }
-    
 }
 
 // Create the view that represents the current state of the sudoku grid
@@ -121,7 +113,6 @@ CGFloat GRID_INSET_RATIO = 0.1;
     
     CGRect gridFrame = CGRectMake(x, y, size, size);
 
-    
     _gridView = [[KMGridView alloc] initWithFrame:gridFrame];
     _gridView.backgroundColor = [UIColor clearColor];
     [[_gridView layer] setBorderColor:[UIColor blackColor].CGColor];
@@ -173,7 +164,6 @@ CGFloat GRID_INSET_RATIO = 0.1;
     [_newGameButton.titleLabel setFont: [UIFont fontWithName:@"HelveticaNeue-Bold" size:18.0f]];
     [_newGameButton addTarget:self action:@selector(buttonReleased:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside];
 
-    
     [self.view addSubview:_newGameButton];
     
     CGFloat resetButtonX = CGRectGetWidth(frame) * GRID_INSET_RATIO + (0.2 * 0.8 / 3) * CGRectGetWidth(frame)  + size / 5;
@@ -229,8 +219,6 @@ CGFloat GRID_INSET_RATIO = 0.1;
     [_muteButton addTarget:self action:@selector(buttonReleased:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside];
     
     [self.view addSubview:_muteButton];
-    
-
 }
 
 // Generate non-button text labels
@@ -277,7 +265,6 @@ CGFloat GRID_INSET_RATIO = 0.1;
     CGFloat titleLabelY = CGRectGetHeight(frame) * GRID_INSET_RATIO /2 ;
     CGRect titleLabelFrame = CGRectMake(titleLabelX, titleLabelY, labelLength * 3, labelWidth);
     
-    
     UILabel* titleLabel = [[UILabel alloc] initWithFrame:titleLabelFrame];
     titleLabel.backgroundColor = [UIColor clearColor];
     
@@ -286,7 +273,6 @@ CGFloat GRID_INSET_RATIO = 0.1;
     [titleLabel setFont: [UIFont fontWithName:@"Papyrus" size:30.0f]];
     
     [self.view addSubview:titleLabel];
-    
 }
 
 // Catch grid presses for player moves
@@ -325,8 +311,6 @@ CGFloat GRID_INSET_RATIO = 0.1;
                                                  otherButtonTitles:nil];
     
     [victoryAlert show];
-    //[self updateProgress];
-
 }
 
 // Retrieve values from the grid model and set them in the grid view
@@ -343,7 +327,6 @@ CGFloat GRID_INSET_RATIO = 0.1;
 // Clear non-initial cells
 - (void)resetGame
 {
-
     UIAlertView* resetAlert = [[UIAlertView alloc] initWithTitle:@"Reset game?"
                                                            message:@"You will lose all progress!"
                                                           delegate:self
@@ -371,7 +354,6 @@ CGFloat GRID_INSET_RATIO = 0.1;
 // Show rules and credits in alertView
 - (void)showInfo
 {
-    
     UIAlertView* infoMessage = [[UIAlertView alloc] initWithTitle:@"Sudoku!"
                                                           message:@"The objective of sudoku is to enter a digit from 1 through 9 in each cell, in such a way that each horizontal row, vertical column, and three by three subgrid region contains each number once. \n \nMade by Kevin M and Jeongwoo C \n (c) 2014\nSound credits: keinzweiter on www.freesound.org\nBackground texture: www.myfreetextures.com"
                                                         delegate:self
@@ -428,7 +410,6 @@ CGFloat GRID_INSET_RATIO = 0.1;
         transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
         
         [self.view.layer addAnimation:transition forKey:nil];
-        
     }
     else if (alertView.tag == resetAlertTag) {
         if (buttonIndex == 1) {
@@ -447,8 +428,6 @@ CGFloat GRID_INSET_RATIO = 0.1;
         
         [self.view.layer addAnimation:transition forKey:nil];
     }
-    
-    
 }
 
 // Catch menu button presses
@@ -466,11 +445,7 @@ CGFloat GRID_INSET_RATIO = 0.1;
     else if (sender == _muteButton) {
         [self toggleMusic];
     }
-    
 }
-
-
-
 
 - (void)didReceiveMemoryWarning
 {

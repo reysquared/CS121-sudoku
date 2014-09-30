@@ -20,7 +20,6 @@ CGFloat PADDING_RATIO = 0.01;
     CGFloat _paddingSize;
     CGFloat _cellSize;
     NSMutableArray* _cells;
-    
     id _target;
     SEL _action;
 }
@@ -55,7 +54,6 @@ CGFloat PADDING_RATIO = 0.01;
                 
                 [newCell addTarget:self action:@selector(cellPressedRow:Column:)];
             }
-            
             [_cells addObject:currRow];
         }
     }
@@ -93,8 +91,6 @@ CGFloat PADDING_RATIO = 0.01;
     CGRect cellFrame = CGRectMake(x, y, _cellSize, _cellSize);
     
     KMGridCell* newCell = [[KMGridCell alloc] initWithFrame:cellFrame Row:row Column:col];
-    
-
     
     [self addSubview:newCell];
     

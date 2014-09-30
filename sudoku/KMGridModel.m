@@ -17,7 +17,6 @@
     int _currentGrid[9][9];
 }
 
-
 - (id)init
 {
     self = [super init];
@@ -142,6 +141,5 @@
     }
     return YES;
 }
-
 
 @end

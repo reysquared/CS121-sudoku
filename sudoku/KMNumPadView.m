@@ -27,8 +27,7 @@ CGFloat NUMPAD_PADDING_RATIO = 0.1;
         CGFloat paddingSize = height*NUMPAD_PADDING_RATIO;
         
         CGFloat width = CGRectGetWidth(frame);
-        
-        
+
         CGFloat buttonHeight = height - (2.0 * paddingSize);
         CGFloat buttonWidth = (width - (11.0 * paddingSize)) / 10.0;
         

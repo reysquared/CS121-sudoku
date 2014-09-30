@@ -15,6 +15,7 @@
 - (void)resetGrid;
 - (BOOL)gridComplete;
 - (void)newGridMode:(BOOL)easyMode;
+
 // Added below methods for unit testing purposes
 - (BOOL)checkGridRow:(int)row Column:(int)col Value:(int)val;
 - (BOOL)checkRow:(int)row Value:(int)val;

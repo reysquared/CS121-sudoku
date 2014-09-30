@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface KMGridCell : UIView
+
 - (id)initWithFrame:(CGRect)frame Row:(int)row Column:(int)col;
 - (void)setInitialValue:(int)val;
 - (void)changeValue:(int)val;
 - (void)addTarget:(id)target action:(SEL)action;
+
 @end
